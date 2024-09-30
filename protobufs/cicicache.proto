@@ -13,6 +13,6 @@ message GetResponse {
   bytes value = 1;
 }
 
-service PeanutCache {
+service ciciCache {
   rpc Get(GetRequest) returns (GetResponse);
 }

@@ -19,101 +19,101 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PeanutCache_Get_FullMethodName = "/protobufs.PeanutCache/Get"
+	CiciCache_Get_FullMethodName = "/protobufs.ciciCache/Get"
 )
 
-// PeanutCacheClient is the client API for PeanutCache service.
+// CiciCacheClient is the client API for CiciCache service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type PeanutCacheClient interface {
+type CiciCacheClient interface {
 	Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error)
 }
 
-type peanutCacheClient struct {
+type ciciCacheClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewPeanutCacheClient(cc grpc.ClientConnInterface) PeanutCacheClient {
-	return &peanutCacheClient{cc}
+func NewCiciCacheClient(cc grpc.ClientConnInterface) CiciCacheClient {
+	return &ciciCacheClient{cc}
 }
 
-func (c *peanutCacheClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
+func (c *ciciCacheClient) Get(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetResponse)
-	err := c.cc.Invoke(ctx, PeanutCache_Get_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, CiciCache_Get_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// PeanutCacheServer is the server API for PeanutCache service.
-// All implementations must embed UnimplementedPeanutCacheServer
+// CiciCacheServer is the server API for CiciCache service.
+// All implementations must embed UnimplementedCiciCacheServer
 // for forward compatibility.
-type PeanutCacheServer interface {
+type CiciCacheServer interface {
 	Get(context.Context, *GetRequest) (*GetResponse, error)
-	mustEmbedUnimplementedPeanutCacheServer()
+	mustEmbedUnimplementedCiciCacheServer()
 }
 
-// UnimplementedPeanutCacheServer must be embedded to have
+// UnimplementedCiciCacheServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedPeanutCacheServer struct{}
+type UnimplementedCiciCacheServer struct{}
 
-func (UnimplementedPeanutCacheServer) Get(context.Context, *GetRequest) (*GetResponse, error) {
+func (UnimplementedCiciCacheServer) Get(context.Context, *GetRequest) (*GetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedPeanutCacheServer) mustEmbedUnimplementedPeanutCacheServer() {}
-func (UnimplementedPeanutCacheServer) testEmbeddedByValue()                     {}
+func (UnimplementedCiciCacheServer) mustEmbedUnimplementedCiciCacheServer() {}
+func (UnimplementedCiciCacheServer) testEmbeddedByValue()                   {}
 
-// UnsafePeanutCacheServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PeanutCacheServer will
+// UnsafeCiciCacheServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to CiciCacheServer will
 // result in compilation errors.
-type UnsafePeanutCacheServer interface {
-	mustEmbedUnimplementedPeanutCacheServer()
+type UnsafeCiciCacheServer interface {
+	mustEmbedUnimplementedCiciCacheServer()
 }
 
-func RegisterPeanutCacheServer(s grpc.ServiceRegistrar, srv PeanutCacheServer) {
-	// If the following call pancis, it indicates UnimplementedPeanutCacheServer was
+func RegisterCiciCacheServer(s grpc.ServiceRegistrar, srv CiciCacheServer) {
+	// If the following call pancis, it indicates UnimplementedCiciCacheServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&PeanutCache_ServiceDesc, srv)
+	s.RegisterService(&CiciCache_ServiceDesc, srv)
 }
 
-func _PeanutCache_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _CiciCache_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PeanutCacheServer).Get(ctx, in)
+		return srv.(CiciCacheServer).Get(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PeanutCache_Get_FullMethodName,
+		FullMethod: CiciCache_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PeanutCacheServer).Get(ctx, req.(*GetRequest))
+		return srv.(CiciCacheServer).Get(ctx, req.(*GetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// PeanutCache_ServiceDesc is the grpc.ServiceDesc for PeanutCache service.
+// CiciCache_ServiceDesc is the grpc.ServiceDesc for CiciCache service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var PeanutCache_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "protobufs.PeanutCache",
-	HandlerType: (*PeanutCacheServer)(nil),
+var CiciCache_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "protobufs.ciciCache",
+	HandlerType: (*CiciCacheServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Get",
-			Handler:    _PeanutCache_Get_Handler,
+			Handler:    _CiciCache_Get_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

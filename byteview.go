@@ -16,8 +16,8 @@ func (bv ByteView) Size() int {
 	return len(bv.b)
 }
 
-// DCopy a deep copy of the slice is returned
-func (bv ByteView) DCopy() []byte {
+// DeepCopy a deep copy of the slice is returned
+func (bv ByteView) DeepCopy() []byte {
 	return copyByte(bv.b)
 }
 

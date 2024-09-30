@@ -23,6 +23,7 @@ type Group struct {
 	name      string
 	retriever Retriever
 	cache     *cache
+	server    Picker
 }
 
 var (
@@ -44,6 +45,24 @@ func NewGroup(name string, capacity int64, retriever Retriever) *Group {
 	}
 	groups[name] = g
 	return g
+}
+
+// RegisterSvr 为 Group 注册 Server
+func (g *Group) RegisterSvr(p Picker) {
+	if g.server != nil {
+		panic("group had been registered server")
+	}
+	g.server = p
+}
+
+func DestroyGroup(name string) {
+	g := GetGroup(name)
+	if g != nil {
+		svr := g.server.(*server)
+		svr.Stop()
+		delete(groups, name)
+		log.Printf("Destroy cache [%s %s]", name, svr.addr)
+	}
 }
 
 func GetGroup(name string) *Group {
